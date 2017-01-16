@@ -1,0 +1,84 @@
+* {
+  box-sizing: border-box;
+  font-family: Helvetica;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  overflow: hidden;
+}
+
+header {
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  background: #eee;
+}
+
+#content {
+  display: flex;
+  flex: 4;
+  flex-direction: column;
+  justify-items: flex-end;
+  height: 100%;
+}
+
+#message-list {
+  flex: 10;
+  overflow-y: scroll;
+  /* display: flex; */
+  padding: 20px;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+  min-height: 0px;
+  background: #fff;
+}
+
+span.message {
+  font-family: "Helvetica";
+  display: block;
+  width: 75%;
+  height: 100%;
+  padding: 20px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.outgoing.message {
+  align-self: flex-end;
+  background: blue;
+  color: white;
+  float: right;
+}
+
+.outgoing.message a {
+  color: white;
+}
+
+.incoming.message {
+  align-self: flex-start;
+  background: #eeeeee;
+  color: #333333;
+  float: left;
+}
+
+footer {
+  display: flex;
+}
+
+#message-input {
+  min-height: 50px;
+  padding: 5px 20px;
+  width: 100%;
+  border-top: 1px solid #c0c0c0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+  outline: none;
+}

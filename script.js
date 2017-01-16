@@ -1,50 +1,45 @@
-pubnub = new PubNub({
-    publishKey : 'pub-c-eb044979-c8ac-4355-b4ab-2ea14e9b767d',
-    subscribeKey : 'sub-c-7c1c7364-dacc-11e6-b6b1-02ee2ddab7fe'
-})
-
-var name = prompt("What's your name?");
-
-function publishMessage(message) {
-    if (message == undefined) {
-        message = "Hello world!"
-    }
-
-    var publishConfig = {
-        channel : "chat",
-        message : {
-            username: name,
-            text: message
-        },
-    }
-
-    pubnub.publish(publishConfig, function(status, response) {
-        console.log(status, response);
-        if (status.error == false) {
-            console.log("Published successfully: " + message);
-        }
-    })
+var username;
+if (localStorage.username != undefined) {
+    username = localStorage.username;
+} else {
+    username = prompt("Enter a username");
+    localStorage.setItem("username", username);
 }
 
-pubnub.addListener({
-    status: function(statusEvent) {
-        if (statusEvent.category === "PNConnectedCategory") {
-            // publishMessage(prompt());
-        }
-    },
-    message: function(message) {
-        $("h1").html(message.message.username + ": " + message.message.text);
-        console.log("New Message!!", message);
-    },
-    presence: function(presenceEvent) {
-        // handle presence
-    }
-})
-console.log("Subscribing..");
-pubnub.subscribe({
-    channels: ['chat']
-});
+function notify(message) {
+  if (message == undefined) {return}
+  // Let's check if the browser supports notifications
+  if (!("Notification" in window)) {
+    console.log("This browser does not support desktop notification");
+    return;
+  }
 
-$("body").on("click", function () {
-    publishMessage(prompt())
+  // Let's check whether notification permissions have already been granted
+  else if (Notification.permission === "granted") {
+    // If it's okay let's create a notification
+    var notification = new Notification(message.title, {body: message.body});
+  }
+
+  // Otherwise, we need to ask the user for permission
+  else if (Notification.permission !== 'denied') {
+    Notification.requestPermission(function (permission) {
+      // If the user accepts, let's create a notification
+      if (permission === "granted") {
+        var notification = new Notification(message.title, {body: message.body});
+      }
+    });
+  }
+
+  // At last, if the user has denied notifications, and you
+  // want to be respectful there is no need to bother them any more.
+}
+
+notify();
+
+pubnub = new PubNub({
+    publishKey : 'pub-c-eb044979-c8ac-4355-b4ab-2ea14e9b767d',
+    subscribeKey : 'sub-c-7c1c7364-dacc-11e6-b6b1-02ee2ddab7fe',
+    uuid: username
 })
+
+jQuery.getScript("js/chat.js")

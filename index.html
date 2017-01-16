@@ -8,30 +8,19 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>PubNub Chat</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style type="text/css">
-          body {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          h1 {
-            flex: 1;
-            padding: 50px;
-            text-align: center;
-            font-family: "Helvetica";
-          }
-        </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
-        <h1>click here to message</h1>
+        <div id="content">
+          <header></header>
+          <div id="message-list"></div>
+          <input type="text" id="message-input" placeholder="Type some words">
+        </div>
 
         <!-- Add your site or application content here -->
 
